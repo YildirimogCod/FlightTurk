@@ -20,6 +20,7 @@ public class Ticket extends AuditableEntity {
     @Column(unique = true)
     private String ticketNumber;
     private String seatNumber;
+    @Column(precision = 12, scale = 2)
     private BigDecimal pricePaid;
     private LocalDateTime bookingDate;
     @Enumerated(EnumType.STRING)

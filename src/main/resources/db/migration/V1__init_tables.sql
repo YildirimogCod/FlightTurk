@@ -1,0 +1,50 @@
+CREATE TABLE passengers (
+                            id UUID PRIMARY KEY,
+                            created_at TIMESTAMP NOT NULL,
+                            updated_at TIMESTAMP NOT NULL,
+                            created_by VARCHAR(255),
+                            updated_by VARCHAR(255),
+                            is_deleted BOOLEAN DEFAULT FALSE,
+                            first_name VARCHAR(100) NOT NULL,
+                            last_name VARCHAR(100) NOT NULL,
+                            email VARCHAR(150) UNIQUE NOT NULL,
+                            phone_number VARCHAR(20) NOT NULL,
+                            passport_number VARCHAR(50) UNIQUE NOT NULL,
+                            loyalty_points NUMERIC(12, 2) DEFAULT 0.00,
+                            status VARCHAR(20) NOT NULL
+);
+CREATE TABLE flights (
+                         id UUID PRIMARY KEY,
+                         created_at TIMESTAMP NOT NULL,
+                         updated_at TIMESTAMP NOT NULL,
+                         created_by VARCHAR(255),
+                         updated_by VARCHAR(255),
+                         is_deleted BOOLEAN DEFAULT FALSE,
+                         flight_number VARCHAR(50) UNIQUE NOT NULL,
+                         departure_airport VARCHAR(10) NOT NULL,
+                         arrival_airport VARCHAR(10) NOT NULL,
+                         departure_time TIMESTAMP NOT NULL,
+                         arrival_time TIMESTAMP NOT NULL,
+                         total_capacity INTEGER NOT NULL,
+                         available_seats INTEGER NOT NULL,
+                         base_price NUMERIC(12, 2) NOT NULL,
+                         current_price NUMERIC(12, 2) NOT NULL,
+                         flight_status VARCHAR(20) NOT NULL
+);
+CREATE TABLE tickets (
+                         id UUID PRIMARY KEY,
+                         created_at TIMESTAMP NOT NULL,
+                         updated_at TIMESTAMP NOT NULL,
+                         created_by VARCHAR(255),
+                         updated_by VARCHAR(255),
+                         is_deleted BOOLEAN DEFAULT FALSE,
+                         ticket_number VARCHAR(20) UNIQUE NOT NULL,
+                         seat_number VARCHAR(10),
+                         price_paid NUMERIC(12, 2) NOT NULL,
+                         booking_date TIMESTAMP NOT NULL,
+                         ticket_status VARCHAR(20) NOT NULL,
+                         passenger_id UUID NOT NULL,
+                         flight_id UUID NOT NULL,
+                         CONSTRAINT fk_tickets_passenger FOREIGN KEY (passenger_id) REFERENCES passengers(id),
+                         CONSTRAINT fk_tickets_flight FOREIGN KEY (flight_id) REFERENCES flights(id)
+);
