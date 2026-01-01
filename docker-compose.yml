@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: flight-db-container
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=flightdb
+      - POSTGRES_USER=flightuser
+      - POSTGRES_PASSWORD=flightpass
+    volumes:
+      - postgres_data:/var/lib/postgresql
+volumes:
+  postgres_data:

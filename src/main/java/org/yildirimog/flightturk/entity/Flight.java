@@ -27,7 +27,9 @@ public class Flight extends AuditableEntity{
     private LocalDateTime arrivalTime;
     private Integer totalCapacity;
     private Integer availableSeats;
+    @Column(precision = 12, scale = 2)
     private BigDecimal basePrice;
+    @Column(precision = 12, scale = 2)
     private BigDecimal currentPrice;
     @Enumerated(EnumType.STRING)
     private FlightStatus flightStatus;
