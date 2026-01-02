@@ -8,5 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface FlightRepository extends JpaRepository<Flight, UUID> {
-    boolean findByFlightNumber(String flightNumber);
+    boolean existsByFlightNumber(String flightNumber);
 }
